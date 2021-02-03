@@ -4,6 +4,8 @@ from torch import nn
 from torch.nn import functional as F
 from torch import optim
 
+from typing import Any, cast
+
 import numpy as np
 import torch
 from torch import distributions
@@ -86,8 +88,18 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 
     # query the policy with observation(s) to get selected action(s)
     def get_action(self, obs: np.ndarray) -> np.ndarray:
-        raise NotImplementedError
+        
         # TODO: get this from hw1
+
+        if len(obs.shape) > 1:
+            observation = obs
+        else:
+            observation = obs[None]
+
+        observation_tensor = torch.tensor(observation, dtype=torch.float).to(ptu.device)
+        action_distribution = self.forward(observation_tensor)
+
+        return cast(np.ndarray, action_distribution.sample().cpu().detach().numpy())
 
     ####################################
     ####################################
@@ -104,6 +116,14 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
     def forward(self, observation: torch.FloatTensor):
         raise NotImplementedError
         # TODO: get this from hw1
+
+        if self.discrete:
+            return distributions.Categorical(logits=self.logits_na(observation))
+        else:
+            return distributions.Normal(
+                self.mean_net(observation), 
+                torch.exp(self.logstd)[None],
+            )
 
     ####################################
     ####################################
