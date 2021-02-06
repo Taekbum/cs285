@@ -15,6 +15,8 @@ class PGAgent(BaseAgent):
         self.env = env
         self.agent_params = agent_params
         self.gamma = self.agent_params['gamma']
+        self.lam = self.agent_params['lambda']
+        self.use_gae = self.agent_params['use_gae']
         self.standardize_advantages = self.agent_params['standardize_advantages']
         self.nn_baseline = self.agent_params['nn_baseline']
         self.reward_to_go = self.agent_params['reward_to_go']
@@ -39,12 +41,32 @@ class PGAgent(BaseAgent):
             Training a PG agent refers to updating its actor using the given observations/actions
             and the calculated qvals/advantages that come from the seen rewards.
         """
+        if not self.use_gae:
+            # step 1: calculate q values of each (s_t, a_t) point, using rewards (r_0, ..., r_t, ..., r_T)
+            q_values = self.calculate_q_vals(rewards_list)
 
-        # step 1: calculate q values of each (s_t, a_t) point, using rewards (r_0, ..., r_t, ..., r_T)
-        q_values = self.calculate_q_vals(rewards_list)
+            # step 2: calculate advantages that correspond to each (s_t, a_t) point
+            advantages = self.estimate_advantage(observations, q_values)
 
-        # step 2: calculate advantages that correspond to each (s_t, a_t) point
-        advantages = self.estimate_advantage(observations, q_values)
+        else:
+            rewards_concat = np.concatenate(rewards_list)
+            mb_advs = np.zeros_like(rewards_concat)
+            mb_rets = np.zeros_like(rewards_concat)
+            b_n_unnormalized = self.actor.run_baseline_prediction(observations)
+            next_b_n_unnormalized = np.concatenate([b_n_unnormalized[1:], [0]])
+            
+            ## refer to: backward view (lambda-return) @ rl course by david silver 
+            for t in reversed(range(rewards_concat.shape[0])):
+                if terminals[t]:
+                    delta = rewards_concat[t] - b_n_unnormalized[t]
+                    mb_advs[t] = delta
+                else:
+                    delta = rewards_concat[t] + self.gamma * b_n_unnormalized[t+1] - b_n_unnormalized[t]
+                    mb_advs[t] = delta + self.gamma * self.lam * mb_advs[t+1]
+            mb_rets = mb_advs + b_n_unnormalized
+            
+            q_values = mb_rets
+            advantages = mb_advs
 
         # TODO: step 3: use all datapoints (s_t, a_t, q_t, adv_t) to update the PG actor/policy
         ## HINT: `train_log` should be returned by your actor update method
@@ -155,7 +177,7 @@ class PGAgent(BaseAgent):
             # using a for loop is also fine
 
         list_of_discounted_cumsums = []
-        for start_time in len(rewards):
+        for start_time in range(len(rewards)):
             indices = np.arange(start_time, len(rewards))
             discounts = np.power(self.gamma, indices - start_time)
             discounted_cumsums = np.sum(discounts * rewards[start_time:])

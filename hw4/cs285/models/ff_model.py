@@ -107,7 +107,11 @@ class FFModel(nn.Module, BaseModel):
         :return: a numpy array of the predicted next-states (s_t+1)
         """
         # TODO(Q1) get numpy array of the predicted next-states (s_t+1)
-        prediction, _ = self.forward(
+        # obs = ptu.from_numpy(obs)
+        # acs = ptu.from_numpy(acs)
+        # data_statistics = {key: ptu.from_numpy(value) for key, value in data_statistics.items()}
+
+        prediction, _ = self(
             obs,
             acs,
             data_statistics['obs_mean'],
@@ -152,7 +156,7 @@ class FFModel(nn.Module, BaseModel):
         # `data_statistics['delta_std']`, which keep track of the mean
         # and standard deviation of the model.
 
-        _, pred_delta = self.forward(
+        _, pred_delta = self(
             observations,
             actions,
             data_statistics['obs_mean'],

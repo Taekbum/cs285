@@ -48,7 +48,11 @@ class MBAgent(BaseAgent):
             # select which datapoints to use for this model of the ensemble
             # you might find the num_data_per_ens variable defined above useful
 
-            sample_idx = sample_idices[i*num_data_per_ens : (i+1)*num_data_per_ens]
+            sample_idx = np.concatenate([
+                np.ones(num_data_per_ens, dtype=bool),
+                np.zeros(num_data - num_data_per_ens, dtype=bool),
+            ])
+            np.random.shuffle(sample_idx)
 
             observations = ob_no[sample_idx]  # TODO(Q1)
             actions = ac_na[sample_idx]  # TODO(Q1)

@@ -230,7 +230,7 @@ class RL_Trainer(object):
                 envsteps_this_batch = sum(path['observation'].shape[0] for path in paths)
         
         train_video_paths = None
-        if self.log_video:
+        if self.logvideo:
             print('\nCollecting train rollouts to be used for saving videos...')
             train_video_paths = utils.sample_n_trajectories(self.env, collect_policy, MAX_NVIDEO, MAX_VIDEO_LEN, True)
 
