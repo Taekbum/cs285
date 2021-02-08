@@ -49,6 +49,7 @@ You can add ```--num_agent_train_steps_per_iter<steps>``` or ```--learning_rate<
 When you implement dagger, you can get higher performance as iteration increases because p_phi_theta gets closer to p_data as iteration increases.
 
 
+---
 # How To DO
 ## Setup
 You can run this code on your own machine or on Google Colab. 
