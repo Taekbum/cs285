@@ -107,9 +107,9 @@ class FFModel(nn.Module, BaseModel):
         :return: a numpy array of the predicted next-states (s_t+1)
         """
         # TODO(Q1) get numpy array of the predicted next-states (s_t+1)
-        # obs = ptu.from_numpy(obs)
-        # acs = ptu.from_numpy(acs)
-        # data_statistics = {key: ptu.from_numpy(value) for key, value in data_statistics.items()}
+        obs = ptu.from_numpy(obs)
+        acs = ptu.from_numpy(acs)
+        data_statistics = {key: ptu.from_numpy(value) for key, value in data_statistics.items()}
 
         prediction, _ = self(
             obs,

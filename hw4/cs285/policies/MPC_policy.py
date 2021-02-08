@@ -103,5 +103,5 @@ class MPCPolicy(BasePolicy):
         #       in batch, which can be much faster than looping through each
         #       action sequence.
         
-        assert sum_of_rewards == (N, )
+        assert sum_of_rewards.shape == (N, )
         return sum_of_rewards

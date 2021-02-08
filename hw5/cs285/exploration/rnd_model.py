@@ -22,6 +22,8 @@ class RNDModel(nn.Module, BaseExplorationModel):
         self.size = hparams['rnd_size']
         self.optimizer_spec = optimizer_spec
 
+        self.loss = nn.MSELoss()
+
         # TODO: Create two neural networks:
         # 1) f, the random function we are trying to learn
         # 2) f_hat, the function we are using to learn f
@@ -65,7 +67,7 @@ class RNDModel(nn.Module, BaseExplorationModel):
         
         f_out = self.f(ob_no).detach()
         f_hat_out = self.f_hat(ob_no)
-        error = torch.sqrt(torch.mean(f_out - f_hat_out)**2, dim=1)
+        error = torch.sqrt(torch.mean((f_out - f_hat_out)**2, dim=1))
 
         return error
 
