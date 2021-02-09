@@ -1,6 +1,6 @@
 ## Video 
-* Implement of 2-(2)
-http://localhost:6006/data/plugin/images/individualImage?ts=1612883022.3655584&blob_key=WyIiLCJpbWFnZXMiLCIuIiwiZXZhbF9yb2xsb3V0cyIsNSwyXQ
+* Implement of Bonus (Walker2d, w/ gae)
+
 
 ## How to run
 
@@ -28,39 +28,79 @@ python cs285/scripts/run_hw2.py --env_name InvertedPendulum-v2 --ep_len 1000 --d
 python cs285/scripts/run_hw2.py --env_name LunarLanderContinuous-v2 --ep_len 1000 --discount 0.99 -n 100 -l 2 -s 64 -b 40000 -lr 0.005 --reward_to_go --nn_baseline --exp_name q3_b40000_r0.005
 ```
 
-4. For 4, experiment <b> = {10000, 30000, 50000}, <r> = {0.005, 0.01, 0.02}.
+4. For 4-(1), experiment <b*> = {10000, 30000, 50000}, <r*> = {0.005, 0.01, 0.02}.
 ```
-python cs285/scripts/run_hw2.py --env_name HalfCheetah-v2 --ep_len 150 \
---discount 0.95 -n 100 -l 2 -s 32 -b <b> -lr <r> -rtg --nn_baseline \
---exp_name q4_search_b<b>_lr<r>_rtg_nnbaseline
+python cs285/scripts/run_hw2.py --env_name HalfCheetah-v2 --ep_len 150 --discount 0.95 -n 100 -l 2 -s 32 -b <b*> -lr <r*> -rtg --nn_baseline --exp_name q4_search_b<b*>_lr<r*>_rtg_nnbaseline
 ```
-  
+
+I found <b*>=30000, <r*>=0.02. So, for 4-(2), run
+```
+python cs285/scripts/run_hw2.py --env_name HalfCheetah-v2 --ep_len 150 --discount 0.95 -n 100 -l 2 -s 32 -b 30000 -lr 0.02 --exp_name q4_b30000_r0.02
+python cs285/scripts/run_hw2.py --env_name HalfCheetah-v2 --ep_len 150 --discount 0.95 -n 100 -l 2 -s 32 -b 30000 -lr 0.02 -rtg --exp_name q4_b30000_r0.02_rtg
+python cs285/scripts/run_hw2.py --env_name HalfCheetah-v2 --ep_len 150 --discount 0.95 -n 100 -l 2 -s 32 -b 30000 -lr 0.02 --nn_baseline --exp_name q4_b30000_r0.02_nnbaseline
+python cs285/scripts/run_hw2.py --env_name HalfCheetah-v2 --ep_len 150 --discount 0.95 -n 100 -l 2 -s 32 -b 30000 -lr 0.02 -rtg --nn_baseline --exp_name q4_b30000_r0.02_rtg_nnbaseline
+```
+
+5. For Bonus (implement GAE-lambda), run
+```
+python cs285/scripts/run_hw2.py --env_name Walker2d-v2 --ep_len 1000 --discount 0.99 --lambda 0.95 -n 100 -l 2 -s 64 -b 10000 -lr 0.005 -rtg --nn_baseline --exp_name walker_gae_b10000_r0.005_eval5000 --eval_batch_size 5000 --use_gae=True
+python cs285/scripts/run_hw2.py --env_name Walker2d-v2 --ep_len 1000 --discount 0.99 -n 100 -l 2 -s 64 -b 10000 -lr 0.005 -rtg --nn_baseline --exp_name walker_nogae_b10000_r0.005_eval5000 --eval_batch_size 5000
+```
+
 ## Results
 + You can see results of each experiments in tensorboard. Just click these urls.
-	* 1-(2)
-	https://tensorboard.dev/experiment/6m5DrrF8Sg69WYVGxxYgvA/#scalars  behavior cloning for Ant
-	https://tensorboard.dev/experiment/MKzqDnWxQY6PpCP0Sv61vA/#scalars  behavior cloning for HalfCheetah
+	* 1 (CartPole)
+	https://tensorboard.dev/experiment/V7mmHAGpRzWJdkp0pcWT7Q/#scalars  PG w/ batch size: 1000, trajectory-centric reward, and w/o advantage normalization
+	https://tensorboard.dev/experiment/ae3212I6T2erGionCls4Cg/#scalars  PG w/ batch size: 1000, reward-to-go, and w/o advantage normalization
+	https://tensorboard.dev/experiment/SpDbYG24QBeQ5OYrEwMlZQ/#scalars  PG w/ batch size: 1000, reward-to-go, and advantage normalization
 
-	* 1-(3)
-	https://tensorboard.dev/experiment/n6qmZIpAQ4uOS6imyB4uMg/#scalars  behavior cloning for Ant, w/ less expert data: 100 (s,a) tuples (default: 1000)
-	https://tensorboard.dev/experiment/3bPqzeTqRwGh0DvfQ0qF9A/#scalars  behavior cloning for Ant, w/ more gradient steps in each iteration: 5000 steps 		(default: 1000)
+	https://tensorboard.dev/experiment/ViKJNwK8SZaanuYjZvU8Bw/#scalars  PG w/ batch size: 5000, trajectory-centric reward, and w/o advantage normalization
+	https://tensorboard.dev/experiment/rpO83rvhQJiOwrBRgG0xGQ/#scalars  PG w/ batch size: 5000, reward-to-go, and w/o advantage normalization
+	https://tensorboard.dev/experiment/MkIYlTbcRei9rt0I6Rxo4A/#scalars  PG w/ batch size: 5000, reward-to-go, and advantage normalization
 
-	* 2-(2)
-	https://tensorboard.dev/experiment/qwx71P83TZ6jWlIRyXpjtQ/#scalars  DAgger for Humanoid
+	* 2 (InvertedPendulum)
+	https://tensorboard.dev/experiment/iOVlYBQrReOWhAmfoZKBSw/#scalars  default setting
+	https://tensorboard.dev/experiment/4npam85fQBet8W5MWmyoig/#scalars  lr 0.008
+	https://tensorboard.dev/experiment/zdOGfGXLS7KWpqh5S68K0A/#scalars  lr 0.01
+	https://tensorboard.dev/experiment/Y6hrBa7SQRmg2yFaWpg0cQ/#scalars  b 500
+	https://tensorboard.dev/experiment/LH4AoTKPR0aZiGe6ElU6XA/#scalars  b 100
+	https://tensorboard.dev/experiment/1QK1MwYdRemQA9ZSJR2o9w/#scalars  b 100 lr 0.008 -> this is best case
+	https://tensorboard.dev/experiment/gKzRZbPdT26OPkX9ewtv9Q/#scalars  b 100 lr 0.01
+
+	* 3 (LunarLander)
+	https://tensorboard.dev/experiment/rOmwMvbdTLOfqKojDguopQ/#scalars  PG w/ baseline
+	
+	* 4-(1) (HalfCheetah)
+	https://tensorboard.dev/experiment/6jhXOZ7JSPS0G9BcxXD5XA/#scalars  b = 30000, lr = 0.02 (best case)
+	
+	* 4-(2)
+	https://tensorboard.dev/experiment/O00yrmD3TpOIdlLo1MiahA/#scalars  w/ trajectory-centric reward & w/o baseline
+	https://tensorboard.dev/experiment/YIMoptLuQoOUzS6r9oWs2Q/#scalars  w/ reward-to-go & w/o baseline
+	https://tensorboard.dev/experiment/ycMFqw1wRgqqu8D66EyLeA/#scalars  w/ trajectory-centric reward & baseline
+	https://tensorboard.dev/experiment/6jhXOZ7JSPS0G9BcxXD5XA/#scalars  w/ reward-to-go & baseline
+	
+	* Bonus (Walker2d)
+	https://tensorboard.dev/experiment/GVq90UAYTOewEqR3DE8p7A/#scalars  w/ gae, lambda = 0.95
+	https://tensorboard.dev/experiment/APaH15TYQs2cRiNm6EsyjA/#scalars  w/o gae
 
 + Or go to each folder in run_logs folder, try:
 ```
 tensorboard --logdir .
 ```
-You can see video of behavior cloning for Ant by this way.
+You can see video in ```walker_gae_b10000_r0.005_eval5000_Walker2d-v2_10-02-2021_00-22-35``` folder (Walker2d, w/ gae) by this way.
 
 
 ## Discuss
-* 1-(3)
-You can add ```--num_agent_train_steps_per_iter<steps>``` or ```--learning_rate<lr>``` to train your policy more optimally w.r.t to data, ```--n_layers<n_layers>```, ```--size<#of hidden units in each layer>``` or ```--train_batch_size<t_b_s>``` to change policy network architecture (just classification network in hw1),  and ```--batch_size<n_b>``` to get more expert data
+* 1
+1) Reward_to_go is better than trajectory centric one.
+2) Advantage standarization helps.
+3) Larger batch size(evaluate objective function with many rollouts at each iteration) helps a lot.
 
-* 2-(2)
-When you implement dagger, you can get higher performance as iteration increases because p_phi_theta gets closer to p_data as iteration increases.
+* 4-(2)
+Both reward-to-go and baseline are better than default. Using reward-to-go and baseline together is best because they decrease variance of objective of PG.
+
+* Bonus
+w/o gae is lambda = 1 case of gae-lambda because hw2 is implementation of REINFORCE algorithm (using sum of actual returns). Performance is variant according to lambda value.
 
 ## Plotting your results
 
