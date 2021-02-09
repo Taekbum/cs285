@@ -82,20 +82,22 @@ class CQLCritic(BaseCritic):
         loss, qa_t_values, q_t_values = self.dqn_loss(
             ob_no, ac_na, next_ob_no, reward_n, terminal_n
             )
+        # qa_t_values : q(s,a) / q_t_values : expected q w.r.t sampled a's
         
         # CQL Implementation
         # TODO: Implement CQL as described in the pdf and paper
         # Hint: After calculating cql_loss, augment the loss appropriately
         
+        # I referred to Lec 15. 33p
         q_t_logsumexp = qa_t_values.logsumexp(dim=1)
-        cql_loss = (q_t_logsumexp + q_t_values).mean()
+        cql_loss = (q_t_logsumexp - q_t_values).mean()
         loss += self.cql_alpha * cql_loss
 
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
 
-        info = {'Training Loss': ptu.to_numpy(loss)}
+        info = {'Training Loss': ptu.to_numpy(loss)}  # We only train q-function in this assignment
 
         # TODO: Uncomment these lines after implementing CQL
         info['CQL Loss'] = ptu.to_numpy(cql_loss)

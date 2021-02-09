@@ -65,7 +65,7 @@ class RNDModel(nn.Module, BaseExplorationModel):
         # TODO: Get the prediction error for ob_no
         # HINT: Remember to detach the output of self.f!
         
-        f_out = self.f(ob_no).detach()
+        f_out = self.f(ob_no).detach()  # detach because it's target
         f_hat_out = self.f_hat(ob_no)
         error = torch.sqrt(torch.mean((f_out - f_hat_out)**2, dim=1))
 
@@ -83,7 +83,7 @@ class RNDModel(nn.Module, BaseExplorationModel):
         ob_no = ptu.from_numpy(ob_no)
         
         rnd_error = self(ob_no)
-        loss = self.loss(rnd_error, torch.zeros_like(rnd_error))
+        loss = self.loss(rnd_error, torch.zeros_like(rnd_error))  # prediction error
         
         self.optimizer.zero_grad()
         loss.backward()
