@@ -1,6 +1,6 @@
 ## Video 
 * Implement of 1 (Pac-man)
-
+- haven't done yet.
 
 ## How to run
 
