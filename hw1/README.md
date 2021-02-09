@@ -1,3 +1,7 @@
+## Video 
+* Implement of 2-(2)
+(If you want to watch, go ```q2_dagger_humanoid_Humanoid-v2_10-02-2021_00-58-15``` folder and try ```tensorboard --logdir .```.
+
 ## How to run
 
 ```
@@ -7,6 +11,7 @@ cd <path to hw1 folder>
 1. For 1-(2), run
 ```
 python cs285/scripts/run_hw1.py --expert_policy_file cs285/policies/experts/Ant.pkl --env_name Ant-v2 --exp_name bc_ant --n_iter 1 --expert_data cs285/expert_data/expert_data_Ant-v2.pkl --video_log_freq -1
+python cs285/scripts/run_hw1.py --expert_policy_file cs285/policies/experts/HalfCheetah.pkl --env_name HalfCheetah-v2 --exp_name bc_halfcheetah --n_iter 1 --expert_data cs285/expert_data/expert_data_HalfCheetah-v2.pkl --video_log_freq -1
 ```
 
 2. For 1-(3), run
@@ -17,7 +22,7 @@ python cs285/scripts/run_hw1.py --expert_policy_file cs285/policies/experts/Ant.
 
 3. For 2-(2), run
 ```
-python cs285/scripts/run_hw1.py --expert_policy_file cs285/policies/experts/Ant.pkl --env_name Ant-v2 --exp_name dagger_ant --n_iter 10 --do_dagger --expert_data cs285/expert_data/expert_data_Ant-v2.pkl --video_log_freq -1
+python cs285/scripts/run_hw1.py --expert_policy_file cs285/policies/experts/Humanoid.pkl --env_name Humanoid-v2 --exp_name dagger_humanoid --n_iter 10 --do_dagger --expert_data cs285/expert_data/expert_data_Humanoid-v2.pkl --video_log_freq -1
 ```
 
 
