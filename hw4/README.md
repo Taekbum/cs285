@@ -47,9 +47,8 @@ python cs285/scripts/run_hw4_mb.py --exp_name q4_reacher_ensemble5 --env_name re
 ## Results
 + You can see results of each experiments in tensorboard. Just click these urls.
 	* 1 (cheetah)
-	![itr_0_losses](https://user-images.githubusercontent.com/53718808/107408132-e2673300-6b4d-11eb-8fe8-08839666df81.png) 
-	<img src="https://user-images.githubusercontent.com/53718808/107408132-e2673300-6b4d-11eb-8fe8-08839666df81.png"  width="700" height="370">
-	![itr_0_predictions](https://user-images.githubusercontent.com/53718808/107408149-ebf09b00-6b4d-11eb-9243-71bb8bacec22.png)
+	<img src="https://user-images.githubusercontent.com/53718808/107408132-e2673300-6b4d-11eb-8fe8-08839666df81.png"  width="200" height="150"> <img src="https://user-images.githubusercontent.com/53718808/107408149-ebf09b00-6b4d-11eb-9243-71bb8bacec22.png"  width="200" height="150">
+	
 	![itr_0_losses](https://user-images.githubusercontent.com/53718808/107408200-fca11100-6b4d-11eb-9c55-9368e1e1c2fe.png) ![itr_0_predictions](https://user-images.githubusercontent.com/53718808/107408211-00349800-6b4e-11eb-87ca-238012600f28.png)
 	![itr_0_losses](https://user-images.githubusercontent.com/53718808/107408233-088cd300-6b4e-11eb-8924-8a44e759dae3.png) ![itr_0_predictions](https://user-images.githubusercontent.com/53718808/107408237-0b87c380-6b4e-11eb-865c-63c5c354986d.png)
 
