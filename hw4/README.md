@@ -47,9 +47,18 @@ python cs285/scripts/run_hw4_mb.py --exp_name q4_reacher_ensemble5 --env_name re
 ## Results
 + You can see results of each experiments in tensorboard. Just click these urls.
 	* 1 (cheetah) 
+	
+	
+	
+	
+	
+	
 	<img src="https://user-images.githubusercontent.com/53718808/107408132-e2673300-6b4d-11eb-8fe8-08839666df81.png"  width="300" height="225"> <img src="https://user-images.githubusercontent.com/53718808/107408149-ebf09b00-6b4d-11eb-9243-71bb8bacec22.png"  width="300" height="225">
+	
 	<img src="https://user-images.githubusercontent.com/53718808/107408200-fca11100-6b4d-11eb-9c55-9368e1e1c2fe.png"  width="300" height="225"> <img src="https://user-images.githubusercontent.com/53718808/107408211-00349800-6b4e-11eb-87ca-238012600f28.png"  width="300" height="225">
+	
 	<img src="https://user-images.githubusercontent.com/53718808/107408233-088cd300-6b4e-11eb-8924-8a44e759dae3.png"  width="300" height="225"> <img src="https://user-images.githubusercontent.com/53718808/107408237-0b87c380-6b4e-11eb-865c-63c5c354986d.png"  width="300" height="225">
+	
 	order: (n_layer 1, hidden_size 32, train_steps_per_iter 500) - (n_layer 2, hidden_size 250, train_steps_per_iter 5) - (n_layer 2, hidden_size 250, train_steps_per_iter 500)
 
 	* 2 (obstacles)
