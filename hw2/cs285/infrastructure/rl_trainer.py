@@ -14,8 +14,8 @@ from cs285.infrastructure import utils
 from cs285.infrastructure.logger import Logger
 
 # how many rollouts to save as videos to tensorboard
-MAX_NVIDEO = 2
-MAX_VIDEO_LEN = 40 # we overwrite this in the code below
+MAX_NVIDEO = 5
+MAX_VIDEO_LEN = 1000 # we overwrite this in the code below
 
 
 class RL_Trainer(object):

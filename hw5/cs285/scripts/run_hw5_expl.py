@@ -85,7 +85,7 @@ def main():
     params['num_agent_train_steps_per_iter'] = 1
     params['num_critic_updates_per_agent_update'] = 1
     params['exploit_weight_schedule'] = ConstantSchedule(1.0)
-    params['video_log_freq'] = -1 # This param is not used for DQN
+    params['video_log_freq'] = 5 # This param is not used for DQN
     params['num_timesteps'] = 50000
     params['learning_starts'] = 2000
     params['eps'] = 0.2
