@@ -1,4 +1,4 @@
-![d](http://localhost:6006/data/plugin/images/individualImage?ts=1612883022.3655584&blob_key=WyIiLCJpbWFnZXMiLCIuIiwiZXZhbF9yb2xsb3V0cyIsNSwyXQ)
+http://localhost:6006/data/plugin/images/individualImage?ts=1612883022.3655584&blob_key=WyIiLCJpbWFnZXMiLCIuIiwiZXZhbF9yb2xsb3V0cyIsNSwyXQ
 ## How to run
 
 ```
