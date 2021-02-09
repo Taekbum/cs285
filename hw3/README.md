@@ -1,36 +1,95 @@
-## Setup
+## Video 
+* Implement of 1 (Pac-man)
 
-You can run this code on your own machine or on Google Colab. 
 
-1. **Local option:** If you choose to run locally, you will need to install MuJoCo and some Python packages; see [installation.md](../hw1/installation.md) from homework 1 for instructions. There are two new package requirements (`opencv-python` and `gym[atari]`) beyond what was used in the previous assignments; make sure to install these with `pip install -r requirements.txt` if you are running the assignment locally.
+## How to run
 
-2. **Colab:** The first few sections of the notebook will install all required dependencies. You can try out the Colab option by clicking the badges below:
+```
+cd <path to hw3 folder>
+```
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/berkeleydeeprlcourse/homework_fall2020/blob/master/hw3/cs285/scripts/run_hw3_dqn.ipynb) **Part I (Q-learning)** 
+1. For 1, run
+```
+python cs285/scripts/run_hw3_dqn.py --env_name MsPacman-v0 --exp_name q1
+```
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/berkeleydeeprlcourse/homework_fall2020/blob/master/hw3/cs285/scripts/run_hw3_actor_critic.ipynb)     **Part II (Actor-critic)** 
+2. For 2, run
+```
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_dqn_1 --seed 1
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_dqn_2 --seed 2
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_dqn_3 --seed 3
+```
+```
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_1 --double_q --seed 1
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_2 --double_q --seed 2
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_3 --double_q --seed 3
+```
 
-## Complete the code
+3. For 3, run
+```
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_1 --double_q --seed 1 --batch_size 16
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_2 --double_q --seed 2 --batch_size 64
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_3 --double_q --seed 3 --batch_size 128
+```
 
-The following files have blanks to be filled with your solutions from homework 1. The relevant sections are marked with `TODO: get this from hw1 or hw2`.
+4. For 4, run
+```
+python run_hw3_actor_critic.py --env_name CartPole-v0 -n 100 -b 1000 --exp_name q4_ac_1_1 -ntu 1 -ngsptu 1
+python run_hw3_actor_critic.py --env_name CartPole-v0 -n 100 -b 1000 --exp_name q4_100_1 -ntu 100 -ngsptu 1
+python run_hw3_actor_critic.py --env_name CartPole-v0 -n 100 -b 1000 --exp_name q4_1_100 -ntu 1 -ngsptu 100
+python run_hw3_actor_critic.py --env_name CartPole-v0 -n 100 -b 1000 --exp_name q4_10_10 -ntu 10 -ngsptu 10
+```
 
-- [infrastructure/rl_trainer.py](cs285/infrastructure/rl_trainer.py)
-- [infrastructure/utils.py](cs285/infrastructure/utils.py)
-- [policies/MLP_policy.py](cs285/policies/MLP_policy.py)
+5. From 4, best setting was ntu 10, nsptu 10. So, run
+```
+python run_hw3_actor_critic.py --env_name InvertedPendulum-v2 --ep_len 1000 --discount 0.95 -n 100 -l 2 -s 64 -b 5000 -lr 0.01 --exp_name q5_10_10 -ntu 10 -ngsptu 10
+python run_hw3_actor_critic.py --env_name HalfCheetah-v2 --ep_len 150 --discount 0.90 --scalar_log_freq 1 -n 150 -l 2 -s 32 -b 30000 -eb 1500 -lr 0.02 --exp_name q5_10_10 -ntu 10 -ngsptu 10
+```
 
-You will then need to implement new routines in the following files for homework 3 part 1 (Q-learning):
-- [agents/dqn_agent.py](cs285/agents/dqn_agent.py)
-- [critics/dqn_critic.py](cs285/critics/dqn_critic.py)
-- [policies/argmax_policy.py](cs285/policies/argmax_policy.py)
+## Results
++ You can see results of each experiments in tensorboard. Just click these urls.
+	* 1 (Pac-Man)
+	
 
-and in the following files for part 2 (actor-critic):
-- [agents/ac_agent.py](cs285/agents/ac_agent.py)
-- [critics/bootstrapped_continuous_critic.py](cs285/critics/bootstrapped_continuous_critic.py)
-- [policies/MLP_policy.py](cs285/policies/MLP_policy.py)
+	* 2 (LunarLander)
+	(DQN)
+  https://tensorboard.dev/experiment/qRTMTXPVSRqDRZlEb3pLsQ/#scalars  seed 1
+  https://tensorboard.dev/experiment/x8XykEq6RQ6Jx68DxB1eaw/#scalars  seed 2
+  https://tensorboard.dev/experiment/DFo7qwmcQ9m3kyTX3ipzrA/#scalars  seed 3
+  
+  (Double-DQN)
+  https://tensorboard.dev/experiment/1u2XrEleQaGXW3BuLYX3Cw/#scalars  seed 1
+  https://tensorboard.dev/experiment/pJqyLv2nRU6oxgUgLlkNLA/#scalars  seed 2
+  https://tensorboard.dev/experiment/x2Lcl0I3Qlyv8kQboGjFEQ/#scalars  seed 3
 
-The relevant sections are marked with `TODO`.
+	* 3 (LunarLander)
+	https://tensorboard.dev/experiment/vpLCY444RwOqxGL06T41Ag/#scalars  batch 16
+  https://tensorboard.dev/experiment/uwwV3AsRS7mxZzxnpHXJzQ/#scalars  batch 64
+  https://tensorboard.dev/experiment/Etd90rBzT0WsgU4Mh5gJoA/#scalars  batch 128
+  
+  * 4 (CartPole)
+  https://tensorboard.dev/experiment/3Ny9OyHvT0Cys7cOj5UyCA/#scalars  ntu 1 ngsptu 100
+  https://tensorboard.dev/experiment/7gjbRAqJQSyeXt0KXyzEiw/#scalars  ntu 100 ngsptu 1
+  https://tensorboard.dev/experiment/J0N5V6AjQMy3U8kOGnvwQA/#scalars  ntu 10 ngsptu 10
+  ntu (target updates per each sampled batch) 10 & ngsptu (gradient steps per each target update) 10 is best.
+  
+  * 5 
+  https://tensorboard.dev/experiment/lCARrd2ZTluKbdgGeyz4uA/#scalars  (Inverted Pendulum)
+  https://tensorboard.dev/experiment/t7MJ0JWYQ7ajRPvFoBoFog/#scalars  (Half Cheetah)
 
-You may also want to look through [run_hw3_dqn.py](cs285/scripts/run_hw3_dqn.py) and [run_hw3_actor_critic.py](cs285/scripts/run_hw3_actor_critic.py) (if running locally) or [run_hw3_dqn.ipynb](cs285/scripts/run_hw3_dqn.ipynb) and [run_hw3_actor_critic.ipynb](cs285/scripts/run_hw3_actor_critic.ipynb) (if running on Colab), though you will not need to edit this files beyond changing runtime arguments in the Colab notebook.
++ Or go to each folder in run_logs folder, try:
+```
+tensorboard --logdir .
+```
+You can see video of DQN for Pac-Man by this way.
 
-See the [assignment PDF](cs285_hw3.pdf) for more details on what files to edit.
 
+## Discuss
+* 2
+Double DQN is better because
+
+* 3
+effect of batch size:
+
+* 4
+effect of target updates per each sampled batch & gradient steps per each target update:
