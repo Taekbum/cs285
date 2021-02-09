@@ -1,6 +1,6 @@
 ## Video 
 * Implement of 2-(2)
-http://localhost:6006/data/plugin/images/individualImage?ts=1612883022.3655584&blob_key=WyIiLCJpbWFnZXMiLCIuIiwiZXZhbF9yb2xsb3V0cyIsNSwyXQ
+(If you want to watch, go ```q2_dagger_humanoid_Humanoid-v2_10-02-2021_00-58-15``` folder and try ```tensorboard --logdir .```.
 
 ## How to run
 
