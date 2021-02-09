@@ -123,6 +123,14 @@ def get_env_kwargs(env_name):
 
     return kwargs
 
+## added these lines to implement part 1.2
+lander_q_network_layers = 2
+
+def set_lander_q_network_layers(num_layers):
+    global lander_q_network_layers
+    lander_q_network_layers = num_layers
+##
+
 def create_lander_q_network(ob_dim, num_actions):
     return nn.Sequential(
         nn.Linear(ob_dim, 64),

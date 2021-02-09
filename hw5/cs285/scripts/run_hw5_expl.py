@@ -3,7 +3,7 @@ import time
 
 from cs285.infrastructure.rl_trainer import RL_Trainer
 from cs285.agents.explore_or_exploit_agent import ExplorationOrExploitationAgent
-from cs285.infrastructure.dqn_utils import get_env_kwargs, PiecewiseSchedule, ConstantSchedule
+from cs285.infrastructure.dqn_utils import get_env_kwargs, PiecewiseSchedule, ConstantSchedule, set_lander_q_network_layers
 
 
 class Q_Trainer(object):
@@ -54,6 +54,12 @@ def main():
     parser.add_argument('--use_rnd', action='store_true')
     parser.add_argument('--num_exploration_steps', type=int, default=10000)
     parser.add_argument('--unsupervised_exploration', action='store_true')
+
+    ## added these lines to implement part 1.2
+    parser.add_argument('--use_cbe', action='store_true', help='use count-based exploration')
+    parser.add_argument('--cbe_coefficient', type=float, default=1.0, help='count-based exploration coefficient')
+    parser.add_argument('--dqn_n_layers', type=int, default=2)
+    ##
 
     parser.add_argument('--offline_exploitation', action='store_true')
     parser.add_argument('--cql_alpha', type=float, default=0.0)
@@ -108,6 +114,9 @@ def main():
         if not params['use_rnd']:
             params['learning_starts'] = params['num_exploration_steps']
     
+    ## added these lines to implement part 1.2
+    set_lander_q_network_layers(params['dqn_n_layers'])
+    ##
 
     logdir_prefix = 'hw5_expl_'  # keep for autograder
     data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../data')
