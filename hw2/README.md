@@ -1,6 +1,6 @@
 ## Video 
 * Implement of Bonus (Walker2d, w/ gae)
-
+in ```cd <path to hw2/run_logs/walker_gae_b10000_r0.005_eval5000_Walker2d-v2_10-02-2021_00-22-35>``` folder, try ```tensorboard --logdir .```. You can see video in IMAGES tab.
 
 ## How to run
 
