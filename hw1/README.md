@@ -1,6 +1,6 @@
 ## Video 
 * Implement of 2-(2)
-(If you want to watch, go ```q2_dagger_humanoid_Humanoid-v2_10-02-2021_00-58-15``` folder and try ```tensorboard --logdir .```.
+(If you want to watch, go ```cd <path to hw4>/run_logs/q2_dagger_humanoid_Humanoid-v2_10-02-2021_00-58-15``` folder and try ```tensorboard --logdir .```. You can see video in IMAGES tab.
 
 ## How to run
 

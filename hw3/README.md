@@ -1,7 +1,3 @@
-## Video 
-* Implement of 1 (Pac-man)
-- haven't done yet.
-
 ## How to run
 
 ```
@@ -27,9 +23,9 @@ python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doub
 
 3. For 3, run
 ```
-python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_1 --double_q --seed 1 --batch_size 16
-python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_2 --double_q --seed 2 --batch_size 64
-python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q2_doubledqn_3 --double_q --seed 3 --batch_size 128
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q3_hparam1 --batch_size 16
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q3_hparam2 --batch_size 64
+python cs285/scripts/run_hw3_dqn.py --env_name LunarLander-v3 --exp_name q3_hparam3 --batch_size 128
 ```
 
 4. For 4, run
@@ -53,29 +49,35 @@ python run_hw3_actor_critic.py --env_name HalfCheetah-v2 --ep_len 150 --discount
 
 	* 2 (LunarLander)
 	(DQN)
-  https://tensorboard.dev/experiment/qRTMTXPVSRqDRZlEb3pLsQ/#scalars  seed 1
-  https://tensorboard.dev/experiment/x8XykEq6RQ6Jx68DxB1eaw/#scalars  seed 2
-  https://tensorboard.dev/experiment/DFo7qwmcQ9m3kyTX3ipzrA/#scalars  seed 3
+  	https://tensorboard.dev/experiment/qRTMTXPVSRqDRZlEb3pLsQ/#scalars  seed 1
+  	https://tensorboard.dev/experiment/x8XykEq6RQ6Jx68DxB1eaw/#scalars  seed 2
+  	https://tensorboard.dev/experiment/DFo7qwmcQ9m3kyTX3ipzrA/#scalars  seed 3
   
-  (Double-DQN)
-  https://tensorboard.dev/experiment/1u2XrEleQaGXW3BuLYX3Cw/#scalars  seed 1
-  https://tensorboard.dev/experiment/pJqyLv2nRU6oxgUgLlkNLA/#scalars  seed 2
-  https://tensorboard.dev/experiment/x2Lcl0I3Qlyv8kQboGjFEQ/#scalars  seed 3
-
+    (Double DQN)
+   	https://tensorboard.dev/experiment/N0AulkJ6SqWraXIB2PO77Q/#scalars  seed 1
+	https://tensorboard.dev/experiment/otjOHj0zRz22ZM68cvQVfQ/#scalars  seed 2
+	https://tensorboard.dev/experiment/yaIVdbHeTlq2vOYb6yDdUw/#scalars  seed 3
+    
 	* 3 (LunarLander)
+	(DQN)
 	https://tensorboard.dev/experiment/vpLCY444RwOqxGL06T41Ag/#scalars  batch 16
-  https://tensorboard.dev/experiment/uwwV3AsRS7mxZzxnpHXJzQ/#scalars  batch 64
-  https://tensorboard.dev/experiment/Etd90rBzT0WsgU4Mh5gJoA/#scalars  batch 128
+	https://tensorboard.dev/experiment/uwwV3AsRS7mxZzxnpHXJzQ/#scalars  batch 64
+	https://tensorboard.dev/experiment/Etd90rBzT0WsgU4Mh5gJoA/#scalars  batch 128
+	
+	(Double DQN)
+	https://tensorboard.dev/experiment/FEJK4CdWSXmUvjsvoYtYow/#scalars  batch 16
+	https://tensorboard.dev/experiment/rBrZ3inDSE6xCZLkFrukLQ/#scalars  batch 64
+	https://tensorboard.dev/experiment/Ur5fB5HkTBqc8ylq6o69rA/#scalars  batch 128
   
   * 4 (CartPole)
-  https://tensorboard.dev/experiment/3Ny9OyHvT0Cys7cOj5UyCA/#scalars  ntu 1 ngsptu 100
-  https://tensorboard.dev/experiment/7gjbRAqJQSyeXt0KXyzEiw/#scalars  ntu 100 ngsptu 1
-  https://tensorboard.dev/experiment/J0N5V6AjQMy3U8kOGnvwQA/#scalars  ntu 10 ngsptu 10
-  ntu (target updates per each sampled batch) 10 & ngsptu (gradient steps per each target update) 10 is best.
+  	https://tensorboard.dev/experiment/3Ny9OyHvT0Cys7cOj5UyCA/#scalars  ntu 1 ngsptu 100
+  	https://tensorboard.dev/experiment/7gjbRAqJQSyeXt0KXyzEiw/#scalars  ntu 100 ngsptu 1
+  	https://tensorboard.dev/experiment/J0N5V6AjQMy3U8kOGnvwQA/#scalars  ntu 10 ngsptu 10
+  	ntu (target updates per each sampled batch) 10 & ngsptu (gradient steps per each target update) 10 is best.
   
-  * 5 
-  https://tensorboard.dev/experiment/lCARrd2ZTluKbdgGeyz4uA/#scalars  (Inverted Pendulum)
-  https://tensorboard.dev/experiment/t7MJ0JWYQ7ajRPvFoBoFog/#scalars  (Half Cheetah)
+  	* 5 
+ 	https://tensorboard.dev/experiment/lCARrd2ZTluKbdgGeyz4uA/#scalars  (Inverted Pendulum)
+  	https://tensorboard.dev/experiment/t7MJ0JWYQ7ajRPvFoBoFog/#scalars  (Half Cheetah)
 
 + Or go to each folder in run_logs folder, try:
 ```
@@ -86,10 +88,15 @@ You can see video of DQN for Pac-Man by this way.
 
 ## Discuss
 * 2
-Double DQN is better because
+Compare Double DQN to vanila DQN:
+Look at ```Train_AverageReturn```. For all random seed, those of DQN are similar(very low) to each other. With same seed, those of DDQN are much higher than those of DQN. But their values very differ to each other seed in DDQN case. I think it's because decorrelation between noise of current network(for action selection) and noise of target network(for evaluation) difers according to random seed.
 
 * 3
-effect of batch size:
+effect of batch size: 
+Regardless of using DDQN or not, ```Train_AverageReturn``` does not change much according to batch size. Because agent train Q function enough many times (in this exp, 500k times), even it's ok to use SGD (batch size = 1 case).
 
 * 4
 effect of target updates per each sampled batch & gradient steps per each target update:
+target updates per each sampled batch: ```ntu``` / gradient steps per each target update: ```ngsptu```
+ntu 10 & ngsptu 10 is the best case (reaches maximum 200) but ntu 1 & ngsptu 100 is sufficiently good. ntu 100 & ngsptu 1 is quite bad.
+It means that we don't need to update target network very often, and also gradient step 10 is enough.
