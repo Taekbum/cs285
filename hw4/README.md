@@ -1,5 +1,7 @@
 ## Video 
 * Implement of 2 (obstacles)
+in ```cd <path to hw4/run_logs/hw4_q2_obstacles_singleiteration_obstacles-cs285-v0_08-02-2021_19-39-29>``` folder, try ```tensorboard --logdir .```. 
+You can see video in IMAGES tab.
 
 
 ## How to run
@@ -94,6 +96,11 @@ You can see video of obstacle by this way.
 ## Discuss
 * 1
 effect of network architecture(# of layers & hidden layer size) & model training amount:
+Training loss decreases faster and MPE is smaller at evaluation stage as model network gets more layers and bigger hidden layers. If input states are pictures, we should use some sophisticated CNN as model network.
 
 * 4
 effect of model ensemble size, number of candidate action sequences, and planning horizon:
+
+- planning horizon: Horizon 15 is slightly better than 5, and 30 was worst. It's because horizon 30 is so big that MPC conserns unnecessary far future and it even worsen decision for near future. If horizon is too small, agent will be trained slowly because it can't fix mistakes immediately. Small horizon is enough because the more replan, the less perfect each individual plan needs to be.
+- number of candidate action sequences: With more candidates, agent could train fast. 
+- model ensemble size: More model ensembled, better the agent's performance because it reduces model uncertainty by getting 'agree' of multiple models. However, it can be insufficient because we can only learn a few models due to computational complexity. We can try methods estimating model uncertainty such as Bayesian neural networks instead. 
