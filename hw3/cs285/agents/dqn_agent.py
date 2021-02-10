@@ -56,17 +56,17 @@ class DQNAgent(object):
             # HINT: take random action 
                 # with probability eps (see np.random.random())
                 # OR if your current step number (see self.t) is less that self.learning_starts
-            action = np.random.randint(self.num_actions)
-            # action = self.env.action_space.sample()
+            # action = np.random.randint(self.num_actions)
+            action = self.env.action_space.sample()
         else:
             # HINT: Your actor will take in multiple previous observations ("frames") in order
                 # to deal with the partial observability of the environment. Get the most recent 
                 # `frame_history_len` observations using functionality from the replay buffer,
                 # and then use those observations as input to your actor. 
             frames = self.replay_buffer.encode_recent_observation()
-            frames = frames[None, :]  #added @ 2nd commit
+            # frames = frames[None, :]  #added @ 2nd commit
             action = self.actor.get_action(frames)
-            action = action[0]  #added @ 2nd commit
+            # action = action[0]  #added @ 2nd commit
         
         # TODO take a step in the environment using the action from the policy
         # HINT1: remember that self.last_obs must always point to the newest/latest observation
