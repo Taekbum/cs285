@@ -58,12 +58,16 @@ python run_hw3_actor_critic.py --env_name HalfCheetah-v2 --ep_len 150 --discount
 	https://tensorboard.dev/experiment/otjOHj0zRz22ZM68cvQVfQ/#scalars  seed 2
 	https://tensorboard.dev/experiment/yaIVdbHeTlq2vOYb6yDdUw/#scalars  seed 3
     
-    
-
 	* 3 (LunarLander)
-	https://tensorboard.dev/experiment/vpLCY444RwOqxGL06T41Ag/#scalars batch 16
-	https://tensorboard.dev/experiment/uwwV3AsRS7mxZzxnpHXJzQ/#scalars batch 64
-	https://tensorboard.dev/experiment/Etd90rBzT0WsgU4Mh5gJoA/#scalars batch 128
+	(DQN)
+	https://tensorboard.dev/experiment/vpLCY444RwOqxGL06T41Ag/#scalars  batch 16
+	https://tensorboard.dev/experiment/uwwV3AsRS7mxZzxnpHXJzQ/#scalars  batch 64
+	https://tensorboard.dev/experiment/Etd90rBzT0WsgU4Mh5gJoA/#scalars  batch 128
+	
+	(Double DQN)
+	https://tensorboard.dev/experiment/FEJK4CdWSXmUvjsvoYtYow/#scalars  batch 16
+	https://tensorboard.dev/experiment/rBrZ3inDSE6xCZLkFrukLQ/#scalars  batch 64
+	https://tensorboard.dev/experiment/Ur5fB5HkTBqc8ylq6o69rA/#scalars  batch 128
   
   * 4 (CartPole)
   	https://tensorboard.dev/experiment/3Ny9OyHvT0Cys7cOj5UyCA/#scalars  ntu 1 ngsptu 100
@@ -89,7 +93,7 @@ Look at ```Train_AverageReturn```. For all random seed, those of DQN are similar
 
 * 3
 effect of batch size: 
-Without using DDQN, ```Train_AverageReturn``` is very low regardless of batch size.
+Regardless of using DDQN or not, ```Train_AverageReturn``` does not change much according to batch size. Because agent train Q function enough many times (in this exp, 500k times), even it's ok to use SGD (batch size = 1 case).
 
 * 4
 effect of target updates per each sampled batch & gradient steps per each target update:
